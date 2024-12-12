@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bahan;
+use App\Models\Kategori;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,7 +23,8 @@ class BahanController extends Controller
 
     public function create(): View
     {
-        return view('page.bahan.create');
+        $kategoris = Kategori::all();
+        return view('page.bahan.create', compact('kategoris'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -39,7 +41,8 @@ class BahanController extends Controller
 
     public function edit(Bahan $bahan): View
     {
-        return view('page.bahan.edit', compact('bahan'));
+        $kategoris = Kategori::all();
+        return view('page.bahan.edit', compact('bahan', 'kategoris'));
     }
     public function update(Request $request, Bahan $bahan): RedirectResponse
     {
