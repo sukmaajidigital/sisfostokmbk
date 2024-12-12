@@ -32,7 +32,7 @@ return new class extends Migration
         // Tabel supplier
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('nama_supplier');
             $table->string('nomor');
             $table->text('alamat');
             $table->timestamps();

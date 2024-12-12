@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bahan;
 use App\Models\BahanMasuk;
+use App\Models\Supplier;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,7 +24,9 @@ class BahanMasukController extends Controller
 
     public function create(): View
     {
-        return view('page.bahanmasuk.create');
+        $suppliers = Supplier::all();
+        $bahans = Bahan::all();
+        return view('page.bahanmasuk.create', compact('suppliers', 'bahans'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -39,7 +43,9 @@ class BahanMasukController extends Controller
 
     public function edit(BahanMasuk $bahanmasuk): View
     {
-        return view('page.bahanmasuk.edit', compact('bahanmasuk'));
+        $suppliers = Supplier::all();
+        $bahans = Bahan::all();
+        return view('page.bahanmasuk.edit', compact('bahanmasuk', 'suppliers', 'bahans'));
     }
     public function update(Request $request, BahanMasuk $bahanmasuk): RedirectResponse
     {

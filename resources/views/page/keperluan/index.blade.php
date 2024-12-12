@@ -7,6 +7,7 @@
     <table id="example" class="table table-hover">
         <thead>
             <tr>
+                <th>No.</th>
                 <th>Nama keperluan</th>
                 <th>Action</th>
             </tr>
@@ -14,6 +15,7 @@
         <tbody>
             @foreach ($keperluans as $keperluan)
                 <tr>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $keperluan->nama_keperluan }}</td>
                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                         <a href="{{ route('keperluan.edit', $keperluan->id) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>

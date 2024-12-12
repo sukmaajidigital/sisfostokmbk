@@ -28,7 +28,7 @@ class SupplierController extends Controller
     public function store(Request $request): RedirectResponse
     {
         try {
-            supplier::create($request->all());
+            Supplier::create($request->all());
             return redirect()->route('supplier.index')->with('success', 'supplier created successfully.');
         } catch (\Exception $e) {
             return back()

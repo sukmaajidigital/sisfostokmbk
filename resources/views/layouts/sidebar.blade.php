@@ -22,10 +22,6 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-small-cap">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">MENU</span>
-                </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('sample') }}" aria-expanded="false">
                         <span>
@@ -34,18 +30,23 @@
                         <span class="hide-menu">Sample</span>
                     </a>
                 </li>
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">MENU</span>
+                </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('bahan.index') }}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-article"></i>
+                            <i class="ti ti-box"></i>
                         </span>
                         <span class="hide-menu">Bahan</span>
                     </a>
                 </li>
+
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('kategori.index') }}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-article"></i>
+                            <i class="ti ti-category"></i>
                         </span>
                         <span class="hide-menu">Kategori</span>
                     </a>
@@ -53,7 +54,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('keperluan.index') }}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-article"></i>
+                            <i class="ti ti-news"></i>
                         </span>
                         <span class="hide-menu">Keperluan</span>
                     </a>
@@ -61,7 +62,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('supplier.index') }}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-article"></i>
+                            <i class="ti ti-user"></i>
                         </span>
                         <span class="hide-menu">Supplier</span>
                     </a>
@@ -69,7 +70,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('bahanmasuk.index') }}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-article"></i>
+                            <i class="ti ti-package"></i>
                         </span>
                         <span class="hide-menu">Bahan Masuk</span>
                     </a>
@@ -77,7 +78,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('bahankeluar.index') }}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-article"></i>
+                            <i class="ti ti-package"></i>
                         </span>
                         <span class="hide-menu">Bahan Keluar</span>
                     </a>
