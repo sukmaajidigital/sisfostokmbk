@@ -7,6 +7,8 @@
     <title>Sistem Informasi Pendataan Barang</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/mbk.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
+    <link href="{{ asset('dist/css/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('dist/css/sweetalert2.min.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -32,6 +34,32 @@
     <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+    <script src="{{ asset('dist/js/datatables.min.js') }}"></script>
+    <script src="{{ asset('dist/js/sweetalert2.all.min.js') }}"></script>
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session('success') }}'
+            })
+        @elseif (session('error'))
+            Swal.fire({
+                icon: 'warning',
+                title: '{{ session('error') }}'
+            })
+        @elseif (session('info'))
+            Swal.fire({
+                icon: 'info',
+                title: '{{ session('info') }}'
+            })
+        @elseif (session('delete'))
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session('delete') }}'
+            })
+        @endif
+    </script>
+    @yield('script')
 </body>
 <footer>
     <div class="py-6 px-6 text-center">
