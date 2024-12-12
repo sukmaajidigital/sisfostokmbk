@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/loginpost', [AuthController::class, 'store'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');

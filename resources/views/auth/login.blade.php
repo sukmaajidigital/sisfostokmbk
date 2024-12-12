@@ -22,14 +22,15 @@
                                     <img src="{{ asset('assets/images/logos/mbklong.png') }}" width="180" alt="">
                                 </a>
                                 <p class="text-center">Sistem Pendataan Stok Bahan Baku</p>
-                                <form>
+                                <form method="POST" action="{{ route('login.post') }}">
+                                    @csrf
                                     <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Username</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        <label for="name" class="form-label">Username</label>
+                                        <input type="name" name="name" class="form-control" id="name" aria-describedby="emailHelp">
                                     </div>
                                     <div class="mb-4">
-                                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="exampleInputPassword1">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" name="password" class="form-control" id="password">
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-4">
                                         <div class="form-check">
@@ -40,7 +41,7 @@
                                         </div>
                                         <!-- <a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a> -->
                                     </div>
-                                    <a href="{{ route('dashboard') }}" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</a>
+                                    <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</button>
                                 </form>
                             </div>
                         </div>

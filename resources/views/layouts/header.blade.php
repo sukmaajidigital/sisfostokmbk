@@ -34,7 +34,13 @@
                                 <i class="ti ti-list-check fs-6"></i>
                                 <p class="mb-0 fs-3">My Task</p>
                             </a>
-                            <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <a class="btn btn-outline-primary mx-3 mt-2 d-block" :href="route('logout')" onclick="event.preventDefault();
+                                                            this.closest('form').submit();">
+                                    <i data-feather="power" class="svg-icon mr-2 ml-1"></i> Logout
+                                </a>
+                            </form>
                         </div>
                     </div>
                 </li>

@@ -11,7 +11,7 @@ class DashboardController extends Controller
     public function index()
     {
         // MEMANGGIL DATA USER YANG LOGIN
-        // $user = User::where('id', Auth::user()->id)->first(); // Mengambil data karyawan yang terkait dengan user
-        return view('page.dashboard');
+        $user = User::where('id', Auth::user()->id)->first(); // Mengambil data karyawan yang terkait dengan user
+        return view('page.dashboard', compact('user'));
     }
 }
