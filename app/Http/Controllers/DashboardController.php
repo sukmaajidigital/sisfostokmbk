@@ -10,8 +10,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // MEMANGGIL DATA USER YANG LOGIN
-        $user = User::where('id', Auth::user()->id)->first(); // Mengambil data karyawan yang terkait dengan user
+        $user = User::where('id', Auth::user()->id)->first();
         return view('page.dashboard', compact('user'));
+    }
+    public function sample()
+    {
+        return view('page.sample');
     }
 }
