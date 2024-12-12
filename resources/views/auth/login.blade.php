@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sistem Pendataan Stok Bahan Baku</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/favicon.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/mbk.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
 </head>
 
@@ -26,7 +26,7 @@
                                     @csrf
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Username</label>
-                                        <input type="name" name="name" class="form-control" id="name" aria-describedby="emailHelp">
+                                        <input type="name" name="name" class="form-control" id="name" aria-describedby="emailHelp" autofocus>
                                     </div>
                                     <div class="mb-4">
                                         <label for="password" class="form-label">Password</label>
@@ -34,14 +34,13 @@
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-4">
                                         <div class="form-check">
-                                            <input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked>
+                                            <input class="form-check-input warning" type="checkbox" value="" id="flexCheckChecked">
                                             <label class="form-check-label text-dark" for="flexCheckChecked">
                                                 Remeber this Device
                                             </label>
                                         </div>
-                                        <!-- <a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a> -->
                                     </div>
-                                    <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</button>
+                                    <button type="submit" class="btn btn-warning w-100 py-8 fs-4 mb-4 rounded-2">Sign In</button>
                                 </form>
                             </div>
                         </div>

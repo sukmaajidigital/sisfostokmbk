@@ -41,11 +41,11 @@
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <div class="me-4">
-                                            <span class="round-8 bg-primary rounded-circle me-2 d-inline-block"></span>
+                                            <span class="round-8 bg-warning rounded-circle me-2 d-inline-block"></span>
                                             <span class="fs-2">2023</span>
                                         </div>
                                         <div>
-                                            <span class="round-8 bg-light-primary rounded-circle me-2 d-inline-block"></span>
+                                            <span class="round-8 bg-light-warning rounded-circle me-2 d-inline-block"></span>
                                             <span class="fs-2">2023</span>
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                         <li class="timeline-item d-flex position-relative overflow-hidden">
                             <div class="timeline-time text-dark flex-shrink-0 text-end">09:30</div>
                             <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                                <span class="timeline-badge border-2 border border-primary flex-shrink-0 my-8"></span>
+                                <span class="timeline-badge border-2 border border-warning flex-shrink-0 my-8"></span>
                                 <span class="timeline-badge-border d-block flex-shrink-0"></span>
                             </div>
                             <div class="timeline-desc fs-3 text-dark mt-n1">Payment received from John Doe of $385.90</div>
@@ -112,7 +112,7 @@
                                 <span class="timeline-badge border-2 border border-info flex-shrink-0 my-8"></span>
                                 <span class="timeline-badge-border d-block flex-shrink-0"></span>
                             </div>
-                            <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New sale recorded <a href="javascript:void(0)" class="text-primary d-block fw-normal">#ML-3467</a>
+                            <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New sale recorded <a href="javascript:void(0)" class="text-warning d-block fw-normal">#ML-3467</a>
                             </div>
                         </li>
                         <li class="timeline-item d-flex position-relative overflow-hidden">
@@ -129,7 +129,7 @@
                                 <span class="timeline-badge border-2 border border-warning flex-shrink-0 my-8"></span>
                                 <span class="timeline-badge-border d-block flex-shrink-0"></span>
                             </div>
-                            <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New sale recorded <a href="javascript:void(0)" class="text-primary d-block fw-normal">#ML-3467</a>
+                            <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New sale recorded <a href="javascript:void(0)" class="text-warning d-block fw-normal">#ML-3467</a>
                             </div>
                         </li>
                         <li class="timeline-item d-flex position-relative overflow-hidden">
@@ -191,7 +191,7 @@
                                     </td>
                                     <td class="border-bottom-0">
                                         <div class="d-flex align-items-center gap-2">
-                                            <span class="badge bg-primary rounded-3 fw-semibold">Low</span>
+                                            <span class="badge bg-warning rounded-3 fw-semibold">Low</span>
                                         </div>
                                     </td>
                                     <td class="border-bottom-0">
@@ -270,7 +270,7 @@
             <div class="card overflow-hidden rounded-2">
                 <div class="position-relative">
                     <a href="javascript:void(0)"><img src="../assets/images/products/s4.jpg" class="card-img-top rounded-0" alt="..."></a>
-                    <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>
+                    <a href="javascript:void(0)" class="bg-warning rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>
                 </div>
                 <div class="card-body pt-3 p-4">
                     <h6 class="fw-semibold fs-4">Boat Headphone</h6>
@@ -291,7 +291,7 @@
             <div class="card overflow-hidden rounded-2">
                 <div class="position-relative">
                     <a href="javascript:void(0)"><img src="../assets/images/products/s5.jpg" class="card-img-top rounded-0" alt="..."></a>
-                    <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>
+                    <a href="javascript:void(0)" class="bg-warning rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>
                 </div>
                 <div class="card-body pt-3 p-4">
                     <h6 class="fw-semibold fs-4">MacBook Air Pro</h6>
@@ -312,7 +312,7 @@
             <div class="card overflow-hidden rounded-2">
                 <div class="position-relative">
                     <a href="javascript:void(0)"><img src="../assets/images/products/s7.jpg" class="card-img-top rounded-0" alt="..."></a>
-                    <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>
+                    <a href="javascript:void(0)" class="bg-warning rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>
                 </div>
                 <div class="card-body pt-3 p-4">
                     <h6 class="fw-semibold fs-4">Red Valvet Dress</h6>
@@ -333,7 +333,7 @@
             <div class="card overflow-hidden rounded-2">
                 <div class="position-relative">
                     <a href="javascript:void(0)"><img src="../assets/images/products/s11.jpg" class="card-img-top rounded-0" alt="..."></a>
-                    <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>
+                    <a href="javascript:void(0)" class="bg-warning rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>
                 </div>
                 <div class="card-body pt-3 p-4">
                     <h6 class="fw-semibold fs-4">Cute Soft Teddybear</h6>

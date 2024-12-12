@@ -9,7 +9,7 @@
             <li class="nav-item">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)">
                     <i class="ti ti-bell-ringing"></i>
-                    <div class="notification bg-primary rounded-circle"></div>
+                    <div class="notification bg-warning rounded-circle"></div>
                 </a>
             </li>
         </ul>
@@ -36,7 +36,7 @@
                             </a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <a class="btn btn-outline-primary mx-3 mt-2 d-block" :href="route('logout')" onclick="event.preventDefault();
+                                <a class="btn btn-outline-warning mx-3 mt-2 d-block" :href="route('logout')" onclick="event.preventDefault();
                                                             this.closest('form').submit();">
                                     <i data-feather="power" class="svg-icon mr-2 ml-1"></i> Logout
                                 </a>

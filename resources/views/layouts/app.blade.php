@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sistem Informasi Pendataan Barang</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/favicon.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/mbk.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
 </head>
 
@@ -35,7 +35,7 @@
 </body>
 <footer>
     <div class="py-6 px-6 text-center">
-        <p class="mb-0 fs-4">Design and Developed by <a href="https://sukmaajidigital.github.io/" target="_blank" class="pe-1 text-primary text-decoration-underline">sukmaajidigital</a> Distributed by <a href="https://muriabatikkudus.com" target="_blank">muria batik kudus</a></p>
+        <p class="mb-0 fs-4">Design and Developed by <a href="https://sukmaajidigital.github.io/" target="_blank" class="pe-1 text-warning text-decoration-underline">sukmaajidigital</a> Distributed by <a href="https://muriabatikkudus.com" target="_blank">muria batik kudus</a></p>
     </div>
 </footer>
 
