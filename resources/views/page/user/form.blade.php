@@ -55,7 +55,7 @@
         </div>
     </div>
 </div>
-@include('components.button')
+@include('components.formbutton')
 <script>
     document.getElementById('togglePassword').addEventListener('click', function() {
         const passwordInput = document.getElementById('password');

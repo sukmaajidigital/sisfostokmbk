@@ -36,11 +36,11 @@
                             'route' => route('bahanmasuk.edit', $bahanmasuk->id),
                             'label' => 'Edit Bahan Masuk',
                         ])
-                        <form action="{{ route('bahanmasuk.destroy', $bahanmasuk) }}" method="POST" onsubmit="return confirm('Are you sure?')" style="display: inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
-                        </form>
+                        @include('components.deletebutton', [
+                            'route' => route('bahanmasuk.destroy', $bahanmasuk->id),
+                            'confirmationMessage' => 'Are you sure you want to delete this item?',
+                            'label' => 'Delete',
+                        ])
                     </td>
                 </tr>
             @endforeach

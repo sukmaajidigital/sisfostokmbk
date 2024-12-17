@@ -48,4 +48,4 @@
         </div>
     </div>
 </div>
-@include('components.button')
+@include('components.formbutton')
