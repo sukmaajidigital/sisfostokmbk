@@ -1,9 +1,13 @@
 @extends('layouts.app')
 @section('title', 'bahanmasuk')
 @section('content')
-    <button type="button" class="mb-2 btn btn-primary" onclick="window.location='{{ Route('bahanmasuk.create') }}'">
-        <i class="fa fa-plus"></i> Add data
-    </button>
+
+    <!-- Button Add Data -->
+    @include('components.createmodalbutton', [
+        'route' => route('bahanmasuk.create'),
+        'label' => 'Add Bahan Masuk',
+    ])
+    <!-- Table -->
     <table id="example" class="table table-hover">
         <thead>
             <tr>
@@ -28,42 +32,22 @@
                     </td>
                     <td>{{ $bahanmasuk->supplier->nama_supplier }}</td>
                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                        <a href="{{ route('bahanmasuk.edit', $bahanmasuk->id) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" onclick="loadEditForm('{{ route('bahanmasuk.edit', $bahanmasuk->id) }}')">
+                            <i class="fa fa-edit"></i>
+                        </button>
                         <form action="{{ route('bahanmasuk.destroy', $bahanmasuk) }}" method="POST" onsubmit="return confirm('Are you sure?')" style="display: inline-block;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i>Delete</button>
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
                         </form>
                     </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
+    @include('components.modal', [
+        'edittitle' => 'Edit Bahan Masuk',
+        'createtitle' => 'Tambah Bahan Masuk',
+    ])
 @endsection
-@section('script')
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable({
-                responsive: true,
-                autoWidth: true,
-            });
-        });
-    </script>
-    <script>
-        function confirmDelete(userId) {
-            Swal.fire({
-                title: 'Anda yakin?',
-                text: "Data yang di hapus tidak dapat dikembalikan!",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Hapus',
-                cancelButtonText: 'Batal',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('deleteForm' + userId).submit();
-                }
-            })
-        }
-    </script>
-@endsection
+@include('components.script')

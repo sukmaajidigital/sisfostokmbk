@@ -29,9 +29,4 @@
         @enderror
     </div>
 </div>
-<button class="btn btn-secondary me-2" onclick="window.history.back();">
-    {{ __('Cancel') }}
-</button>
-<button type="submit" class="btn btn-primary">
-    {{ __('Save') }}
-</button>
+@include('components.button')

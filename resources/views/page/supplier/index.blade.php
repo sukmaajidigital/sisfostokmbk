@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('title', 'supplier')
 @section('content')
-    <button type="button" class="mb-2 btn btn-primary" onclick="window.location='{{ Route('supplier.create') }}'">
-        <i class="fa fa-plus"></i> Add data
-    </button>
+    @include('components.createmodalbutton', [
+        'route' => route('supplier.create'),
+        'label' => 'Add Supplier Baru',
+    ])
     <table id="example" class="table table-hover">
         <thead>
             <tr>
@@ -32,4 +33,9 @@
             @endforeach
         </tbody>
     </table>
+    @include('components.modal', [
+        'edittitle' => 'Edit Supplier',
+        'createtitle' => 'Tambah Supplier',
+    ])
 @endsection
+@include('components.script')

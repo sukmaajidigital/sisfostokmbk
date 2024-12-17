@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('title', 'user')
 @section('content')
-    <button type="button" class="mb-2 btn btn-primary" onclick="window.location='{{ Route('user.create') }}'">
-        <i class="fa fa-plus"></i> Add data
-    </button>
+    @include('components.createmodalbutton', [
+        'route' => route('user.create'),
+        'label' => 'Add User Baru',
+    ])
     <table id="example" class="table table-hover">
         <thead>
             <tr>
@@ -42,32 +43,9 @@
             @endforeach
         </tbody>
     </table>
+    @include('components.modal', [
+        'edittitle' => 'Edit User',
+        'createtitle' => 'Tambah User',
+    ])
 @endsection
-@section('script')
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable({
-                responsive: true,
-                autoWidth: true,
-            });
-        });
-    </script>
-    <script>
-        function confirmDelete(userId) {
-            Swal.fire({
-                title: 'Anda yakin?',
-                text: "Data yang di hapus tidak dapat dikembalikan!",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Hapus',
-                cancelButtonText: 'Batal',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('deleteForm' + userId).submit();
-                }
-            })
-        }
-    </script>
-@endsection
+@include('components.script')

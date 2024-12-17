@@ -22,52 +22,50 @@ class BahanKeluarController extends Controller
         $bahankeluars = BahanKeluar::all();
         return view('page.bahankeluar.index', compact('bahankeluars'));
     }
-
     public function create(): View
     {
         $bahans = Bahan::all();
         $keperluans = Keperluan::all();
         return view('page.bahankeluar.create', compact('bahans', 'keperluans'));
     }
-
     public function store(Request $request): RedirectResponse
     {
-        try {
-            $stoklama = bahan::where('id', $request->id_bahan)->first()->stok;
-            bahan::where('id', $request->id_bahan)->update([
-                'stok' => $stoklama - $request->jumlah
-            ]);
-            BahanKeluar::create($request->all());
-            return redirect()->route('bahankeluar.index')->with('success', 'bahankeluar created successfully.');
-        } catch (\Exception $e) {
-            return back()
-                ->withInput()
-                ->withErrors('Failed to create bahankeluar.');
-        }
+        $stoklama = Bahan::where('id', $request->id_bahan)->first()->stok;
+        Bahan::where('id', $request->id_bahan)->update([
+            'stok' => $stoklama - $request->jumlah
+        ]);
+        BahanKeluar::create([
+            'id_bahan' => $request->id_bahan,
+            'tanggal' => $request->tanggal,
+            'id_keperluan' => $request->id_keperluan,
+            'jumlah' => $request->jumlah,
+            'catatan' => $request->catatan,
+        ]);
+        return redirect()->route('bahankeluar.index')->with('success', 'bahankeluar created successfully.');
     }
-
-    public function edit(bahankeluar $bahankeluar): View
+    public function edit(BahanKeluar $bahankeluar): View
     {
         $bahans = Bahan::all();
         $keperluans = Keperluan::all();
         return view('page.bahankeluar.edit', compact('bahankeluar', 'bahans', 'keperluans'));
     }
-    public function update(Request $request, bahankeluar $bahankeluar): RedirectResponse
+    public function update(Request $request, BahanKeluar $bahankeluar): RedirectResponse
     {
-        try {
-            $stoklama = bahan::where('id', $request->id_bahan)->first()->stok;
-            $editbahankeluar = BahanKeluar::where('id_bahan', $request->id_bahan)->first()->jumlah;
-            $hasilstoklama = $stoklama + $editbahankeluar;
-            bahan::where('id', $request->id_bahan)->update([
-                'stok' => $hasilstoklama - $request->jumlah
-            ]);
-            $bahankeluar->update($request->all());
-            return redirect()->route('bahankeluar.index')->with('success', 'bahankeluar update successfully.');
-        } catch (\Exception $e) {
-            return back()
-                ->withInput()
-                ->withErrors('Failed to update bahankeluar.');
-        }
+
+        $stoklama = bahan::where('id', $request->id_bahan)->first()->stok;
+        $editbahankeluar = BahanKeluar::where('id_bahan', $request->id_bahan)->first()->jumlah;
+        $hasilstoklama = $stoklama + $editbahankeluar;
+        bahan::where('id', $request->id_bahan)->update([
+            'stok' => $hasilstoklama - $request->jumlah
+        ]);
+        $bahankeluar->update([
+            'id_bahan' => $request->id_bahan,
+            'tanggal' => $request->tanggal,
+            'id_keperluan' => $request->id_keperluan,
+            'jumlah' => $request->jumlah,
+            'catatan' => $request->catatan,
+        ]);
+        return redirect()->route('bahankeluar.index')->with('success', 'bahankeluar update successfully.');
     }
     public function destroy(bahankeluar $bahankeluar)
     {

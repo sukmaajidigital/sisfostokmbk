@@ -1,11 +1,7 @@
-@extends('layouts.app')
-@section('title', 'Edit bahanmasuk')
-@section('content')
-    <div class="">
-        <form class="" action="{{ route('bahanmasuk.update', $bahanmasuk) }}" method="POST">
-            @csrf
-            @method('PUT')
-            @include('page.bahanmasuk.form')
-        </form>
-    </div>
-@endsection
+<div class="">
+    <form class="" action="{{ route('bahanmasuk.update', $bahanmasuk) }}" method="POST">
+        @csrf
+        @method('PUT')
+        @include('page.bahanmasuk.form')
+    </form>
+</div>

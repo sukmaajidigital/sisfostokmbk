@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('title', 'Kategori')
 @section('content')
-    <button type="button" class="mb-2 btn btn-primary" onclick="window.location='{{ Route('kategori.create') }}'">
-        <i class="fa fa-plus"></i> Add data
-    </button>
+    @include('components.createmodalbutton', [
+        'route' => route('kategori.create'),
+        'label' => 'Add Kategori Baru',
+    ])
     <table id="example" class="table table-hover">
         <thead>
             <tr>
@@ -28,4 +29,9 @@
             @endforeach
         </tbody>
     </table>
+    @include('components.modal', [
+        'edittitle' => 'Edit Kategori',
+        'createtitle' => 'Tambah Kategori',
+    ])
 @endsection
+@include('components.script')

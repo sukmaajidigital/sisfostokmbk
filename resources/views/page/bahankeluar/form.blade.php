@@ -63,24 +63,4 @@
         @enderror
     </div>
 </div>
-
-<button class="btn btn-secondary me-2" onclick="window.history.back();">
-    {{ __('Cancel') }}
-</button>
-<button type="submit" class="btn btn-primary">
-    {{ __('Save') }}
-</button>
-@section('script')
-    <script>
-        function updateStok() {
-            const bahanSelect = document.getElementById('id_bahan');
-            const selectedOption = bahanSelect.options[bahanSelect.selectedIndex];
-            const stok = selectedOption.getAttribute('data-stok');
-            document.getElementById('stok').value = stok || 0;
-        }
-        // Pastikan stok langsung tampil jika bahan sudah dipilih sebelumnya
-        document.addEventListener("DOMContentLoaded", function() {
-            updateStok();
-        });
-    </script>
-@endsection
+@include('components.button')
