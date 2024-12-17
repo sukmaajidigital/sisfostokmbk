@@ -18,8 +18,15 @@ class UserSeeder extends Seeder
             'role' => '1',
             'nama_user' => 'admin',
             'name' => 'admin',
-            'email' => 'admin@abra.com',
+            'email' => 'admin@muriabatik.com',
             'password' => Hash::make('admin123'),
+        ]);
+        User::factory()->create([
+            'role' => '2',
+            'nama_user' => 'owner',
+            'name' => 'owner',
+            'email' => 'owner@muriabatik.com',
+            'password' => Hash::make('owner123'),
         ]);
     }
 }
