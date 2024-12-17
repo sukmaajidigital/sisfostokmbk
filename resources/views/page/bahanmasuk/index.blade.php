@@ -11,6 +11,7 @@
                 <th>Tanggal</th>
                 <th>Jumlah</th>
                 <th>Nama Bahan</th>
+                <th>Catatan</th>
                 <th>Supplier</th>
                 <th>Action</th>
             </tr>
@@ -22,6 +23,9 @@
                     <td>{{ $bahanmasuk->tanggal }}</td>
                     <td>{{ $bahanmasuk->jumlah }}</td>
                     <td>{{ $bahanmasuk->bahan->nama_bahan }}</td>
+                    <td>
+                        <p>{{ $bahanmasuk->catatan }}</p>
+                    </td>
                     <td>{{ $bahanmasuk->supplier->nama_supplier }}</td>
                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                         <a href="{{ route('bahanmasuk.edit', $bahanmasuk->id) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>

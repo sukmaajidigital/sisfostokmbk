@@ -32,7 +32,12 @@ class BahanMasukController extends Controller
     public function store(Request $request): RedirectResponse
     {
         try {
+            $stoklama = bahan::where('id', $request->id_bahan)->first()->stok;
+            bahan::where('id', $request->id_bahan)->update([
+                'stok' => $stoklama + $request->jumlah
+            ]);
             bahanmasuk::create($request->all());
+
             return redirect()->route('bahanmasuk.index')->with('success', 'bahanmasuk created successfully.');
         } catch (\Exception $e) {
             return back()
@@ -50,6 +55,12 @@ class BahanMasukController extends Controller
     public function update(Request $request, BahanMasuk $bahanmasuk): RedirectResponse
     {
         try {
+            $stoklama = bahan::where('id', $request->id_bahan)->first()->stok;
+            $editbahanmasuk = BahanMasuk::where('id_bahan', $request->id_bahan)->first()->jumlah;
+            $hasilstoklama = $stoklama - $editbahanmasuk;
+            bahan::where('id', $request->id_bahan)->update([
+                'stok' => $hasilstoklama + $request->jumlah
+            ]);
             $bahanmasuk->update($request->all());
             return redirect()->route('bahanmasuk.index')->with('success', 'bahanmasuk update successfully.');
         } catch (\Exception $e) {
@@ -60,6 +71,10 @@ class BahanMasukController extends Controller
     }
     public function destroy(bahanmasuk $bahanmasuk)
     {
+        $stoklama = bahan::where('id', $bahanmasuk->id_bahan)->first()->stok;
+        bahan::where('id', $bahanmasuk->id_bahan)->update([
+            'stok' => $stoklama - $bahanmasuk->jumlah
+        ]);
         $bahanmasuk->delete();
         return to_route('bahanmasuk.index')->with('success', 'bahanmasuk Deleted successfully.');
     }

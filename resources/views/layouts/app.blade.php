@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
     <link href="{{ asset('dist/css/datatables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('dist/css/sweetalert2.min.css') }}" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
 <body>

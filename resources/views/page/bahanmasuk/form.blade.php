@@ -17,7 +17,7 @@
 <div class="row mb-4">
     <div class="col-md-12">
         <label for="tanggal" class="form-label">Tanggal</label>
-        <input id="tanggal" name="tanggal" value="{{ old('tanggal', optional($bahankeluar ?? null)->tanggal) }}" type="date" class="form-control">
+        <input id="tanggal" name="tanggal" value="{{ old('tanggal', optional($bahanmasuk ?? null)->tanggal) }}" type="date" class="form-control">
         @error('tanggal')
             <div class="text-danger mt-2">{{ $message }}</div>
         @enderror
@@ -26,8 +26,17 @@
 <div class="row mb-4">
     <div class="col-md-12">
         <label for="jumlah" class="form-label">Jumlah</label>
-        <input id="jumlah" name="jumlah" value="{{ old('jumlah', optional($bahankeluar ?? null)->jumlah) }}" type="number" class="form-control">
+        <input id="jumlah" name="jumlah" value="{{ old('jumlah', optional($bahanmasuk ?? null)->jumlah) }}" type="number" class="form-control">
         @error('jumlah')
+            <div class="text-danger mt-2">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-md-12">
+        <label for="catatan" class="form-label">Catatan</label>
+        <textarea id="catatan" name="catatan" class="form-control">{{ old('catatan', optional($bahanmasuk ?? null)->catatan) }}</textarea>
+        @error('catatan')
             <div class="text-danger mt-2">{{ $message }}</div>
         @enderror
     </div>
