@@ -47,6 +47,7 @@ return new class extends Migration
             $table->foreign('id_bahan')->references('id')->on('bahans')->onDelete('cascade');
             $table->unsignedBigInteger('id_supplier');
             $table->foreign('id_supplier')->references('id')->on('suppliers')->onDelete('cascade');
+            $table->text('catatan')->nullable();
             $table->timestamps();
         });
 

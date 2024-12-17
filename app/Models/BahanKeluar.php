@@ -17,4 +17,8 @@ class BahanKeluar extends Model
     {
         return $this->belongsTo(Bahan::class, 'id_bahan');
     }
+    public function keperluan()
+    {
+        return $this->belongsTo(Keperluan::class, 'id_keperluan');
+    }
 }
