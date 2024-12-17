@@ -23,7 +23,10 @@
                     <td>{{ $supplier->nomor }}</td>
                     <td>{{ $supplier->alamat }}</td>
                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                        <a href="{{ route('supplier.edit', $supplier->id) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                        @include('components.editmodalbutton', [
+                            'route' => route('supplier.edit', $supplier->id),
+                            'label' => 'Edit Supplier',
+                        ])
                         <form action="{{ route('supplier.destroy', $supplier) }}" method="POST" onsubmit="return confirm('Are you sure?')" style="display: inline-block;">
                             @csrf
                             @method('DELETE')

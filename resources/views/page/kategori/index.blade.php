@@ -19,7 +19,10 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $kategori->nama_kategori }}</td>
                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                        <a href="{{ route('kategori.edit', $kategori->id) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                        @include('components.editmodalbutton', [
+                            'route' => route('kategori.edit', $kategori->id),
+                            'label' => 'Edit Kategori',
+                        ])
                         <form action="{{ route('kategori.destroy', $kategori) }}" method="POST" onsubmit="return confirm('Are you sure?')" style="display: inline-block;">
                             @csrf
                             @method('DELETE')

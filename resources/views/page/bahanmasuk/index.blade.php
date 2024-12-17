@@ -32,9 +32,10 @@
                     </td>
                     <td>{{ $bahanmasuk->supplier->nama_supplier }}</td>
                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" onclick="loadEditForm('{{ route('bahanmasuk.edit', $bahanmasuk->id) }}')">
-                            <i class="fa fa-edit"></i>
-                        </button>
+                        @include('components.editmodalbutton', [
+                            'route' => route('bahanmasuk.edit', $bahanmasuk->id),
+                            'label' => 'Edit Bahan Masuk',
+                        ])
                         <form action="{{ route('bahanmasuk.destroy', $bahanmasuk) }}" method="POST" onsubmit="return confirm('Are you sure?')" style="display: inline-block;">
                             @csrf
                             @method('DELETE')

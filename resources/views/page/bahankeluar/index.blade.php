@@ -28,9 +28,10 @@
                     <td>{{ $bahankeluar->catatan }}</td>
                     <td>{{ $bahankeluar->bahan->nama_bahan }}</td>
                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" onclick="loadEditForm('{{ route('bahankeluar.edit', $bahankeluar->id) }}')">
-                            <i class="fa fa-edit"></i>
-                        </button>
+                        @include('components.editmodalbutton', [
+                            'route' => route('bahankeluar.edit', $bahankeluar->id),
+                            'label' => 'Edit Bahan Keluar',
+                        ])
                         <form action="{{ route('bahankeluar.destroy', $bahankeluar->id) }}" method="POST" onsubmit="return confirm('Are you sure?')" style="display: inline-block;">
                             @csrf
                             @method('DELETE')

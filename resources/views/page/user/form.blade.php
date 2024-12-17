@@ -44,7 +44,7 @@
         <div class="col-md-12">
             <label for="password" class="form-label">Password</label>
             <div class="input-group">
-                <input id="password" name="password" value="{{ old('password', optional($user ?? null)->password) }}" type="password" class="form-control" minlength="8" placeholder="Enter your password" required>
+                <input id="password" name="password" value="" type="password" class="form-control" minlength="8" placeholder="Enter your password" required>
                 <button class="btn btn-outline-secondary" type="button" id="togglePassword" aria-label="Show/Hide Password">
                     <i class="bi bi-eye"></i> <!-- Bootstrap icon -->
                 </button>
@@ -56,22 +56,20 @@
     </div>
 </div>
 @include('components.button')
-@section('script')
-    <script>
-        document.getElementById('togglePassword').addEventListener('click', function() {
-            const passwordInput = document.getElementById('password');
-            const toggleButton = document.getElementById('togglePassword');
-            const icon = toggleButton.querySelector('i');
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('password');
+        const toggleButton = document.getElementById('togglePassword');
+        const icon = toggleButton.querySelector('i');
 
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.classList.remove('bi-eye');
-                icon.classList.add('bi-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                icon.classList.remove('bi-eye-slash');
-                icon.classList.add('bi-eye');
-            }
-        });
-    </script>
-@endsection
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+        }
+    });
+</script>

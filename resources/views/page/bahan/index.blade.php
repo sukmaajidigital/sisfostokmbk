@@ -25,7 +25,10 @@
                     <td>{{ $bahan->stok }}</td>
                     <td>{{ $bahan->kategori->nama_kategori }}</td>
                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                        <a href="{{ route('bahan.edit', $bahan->id) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                        @include('components.editmodalbutton', [
+                            'route' => route('bahan.edit', $bahan->id),
+                            'label' => 'Edit Bahan',
+                        ])
                         <form action="{{ route('bahan.destroy', $bahan) }}" method="POST" onsubmit="return confirm('Are you sure?')" style="display: inline-block;">
                             @csrf
                             @method('DELETE')
