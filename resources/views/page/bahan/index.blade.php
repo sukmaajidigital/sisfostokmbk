@@ -5,38 +5,17 @@
         'route' => route('bahan.create'),
         'label' => 'Add Bahan Baru',
     ])
-    <table id="example" class="table table-hover">
+    <table id="bahan-table" class="table table-hover">
         <thead>
             <tr>
-                <th>No.</th>
-                <th>Nama bahan</th>
-                <th>Satuan</th>
+                <th>ID</th>
+                <th>Nama Bahan</th>
                 <th>Stok</th>
+                <th>Satuan</th>
                 <th>Kategori</th>
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach ($bahans as $bahan)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $bahan->nama_bahan }}</td>
-                    <td>{{ $bahan->satuan }}</td>
-                    <td>{{ $bahan->stok }}</td>
-                    <td>{{ $bahan->kategori->nama_kategori }}</td>
-                    <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                        @include('components.editmodalbutton', [
-                            'route' => route('bahan.edit', $bahan->id),
-                            'label' => 'Edit Bahan',
-                        ])
-                        @include('components.deletebutton', [
-                            'route' => route('bahan.destroy', $bahan->id),
-                            'confirmationMessage' => 'Are you sure you want to delete this item?',
-                            'label' => 'Delete',
-                        ])
-                    </td>
-            @endforeach
-        </tbody>
     </table>
     @include('components.modal', [
         'edittitle' => 'Edit Bahan',
@@ -44,3 +23,39 @@
     ])
 @endsection
 @include('components.script')
+@push('script')
+    <script>
+        $('#bahan-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('bahan.getData') }}",
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'nama_bahan',
+                    name: 'nama_bahan'
+                },
+                {
+                    data: 'stok',
+                    name: 'stok'
+                },
+                {
+                    data: 'satuan',
+                    name: 'satuan'
+                },
+                {
+                    data: 'kategori',
+                    name: 'kategori'
+                }, // Kolom kategori ditambahkan
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                }
+            ]
+        });
+    </script>
+@endpush

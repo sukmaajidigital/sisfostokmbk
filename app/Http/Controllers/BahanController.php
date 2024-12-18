@@ -7,6 +7,8 @@ use App\Models\Kategori;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Yajra\DataTables\DataTables;
 
 class BahanController extends Controller
 {
@@ -15,10 +17,33 @@ class BahanController extends Controller
         $bahans = Bahan::all();
         return response()->json($bahans);
     }
+    // public function index(): View
+    // {
+    //     $bahans = Bahan::all();
+    //     return view('page.bahan.index', compact('bahans'));
+    // }
     public function index(): View
     {
-        $bahans = Bahan::all();
-        return view('page.bahan.index', compact('bahans'));
+        return view('page.bahan.index');
+    }
+    public function getData(): JsonResponse
+    {
+        $bahans = Bahan::with('kategori:id,nama_kategori') // Eager load relasi kategori
+            ->select('id', 'nama_bahan', 'stok', 'satuan', 'id_kategori'); // Pilih kolom yang diperlukan
+
+        return DataTables::of($bahans)
+            ->addColumn('kategori', function ($row) {
+                return $row->kategori->nama_kategori ?? '-'; // Tampilkan nama kategori atau tanda jika null
+            })
+            ->addColumn('action', function ($row) {
+                return view('components.action-buttons', [
+                    'editRoute' => route('bahan.edit', $row->id),
+                    'deleteRoute' => route('bahan.destroy', $row->id),
+                    'deleteMessage' => 'Are you sure you want to delete this item?',
+                ])->render();
+            })
+            ->rawColumns(['action']) // Jika kolom action mengandung HTML
+            ->make(true);
     }
 
     public function create(): View

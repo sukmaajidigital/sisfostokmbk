@@ -46,6 +46,7 @@ Route::middleware(['auth', 'role:1,2,3'])->group(function () {
 
     // Bahan
     Route::get('/bahan', [BahanController::class, 'index'])->name('bahan.index');
+    Route::get('/bahan/data', [BahanController::class, 'getData'])->name('bahan.getData');
     Route::get('/bahan/create', [BahanController::class, 'create'])->name('bahan.create');
     Route::post('/bahan', [BahanController::class, 'store'])->name('bahan.store');
     Route::get('/bahan/{bahan}/edit', [BahanController::class, 'edit'])->name('bahan.edit');
