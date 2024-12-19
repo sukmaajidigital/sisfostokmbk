@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bahan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,7 @@ class dumytest extends Seeder
     {
         $data = [];
 
-        for ($i = 1; $i <= 10000; $i++) {
+        for ($i = 1; $i <= 100000; $i++) {
             $data[] = [
                 'nama_bahan' => 'Bahan ' . $i,
                 'satuan' => ['kg', 'liter', 'pcs', 'meter'][array_rand(['kg', 'liter', 'pcs', 'meter'])],
@@ -24,8 +25,7 @@ class dumytest extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
+            Bahan::create($data[$i - 1]);
         }
-
-        DB::table('bahans')->insert($data);
     }
 }
