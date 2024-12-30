@@ -1,5 +1,21 @@
 @extends('layouts.app')
 @section('title', 'bahan')
+@section('formfilter')
+    <div class="row mb-3 align-items-end">
+        <div class="col-md-4">
+            <label for="filter-kategori" class="fw-semibold">Filter Kategori</label>
+            <select id="filter-kategori" class="form-select">
+                <option value="">-- Filter by Kategori --</option>
+                @foreach ($kategoris as $kategori)
+                    <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-4 end">
+            <a id="export-excel" href="#" class="btn btn-success">Export to Excel</a>
+        </div>
+    </div>
+@endsection
 @section('content')
     @include('components.createmodalbutton', [
         'route' => route('bahan.create'),
@@ -25,10 +41,15 @@
 @include('components.script')
 @push('script')
     <script>
-        $('#bahan-table').DataTable({
+        let table = $('#bahan-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('bahan.getData') }}",
+            ajax: {
+                url: "{{ route('bahan.getData') }}",
+                data: function(d) {
+                    d.kategori = $('#filter-kategori').val();
+                }
+            },
             columns: [{
                     data: 'id',
                     name: 'id'
@@ -48,7 +69,7 @@
                 {
                     data: 'kategori',
                     name: 'kategori'
-                }, // Kolom kategori ditambahkan
+                },
                 {
                     data: 'action',
                     name: 'action',
@@ -56,6 +77,15 @@
                     searchable: false
                 }
             ]
+        });
+        $('#filter-kategori').on('change', function() {
+            table.draw();
+        });
+        $('#export-excel').on('click', function(e) {
+            e.preventDefault();
+            let kategori = $('#filter-kategori').val();
+            let exportUrl = "{{ route('bahan.exportExcel') }}?kategori=" + kategori;
+            window.location.href = exportUrl;
         });
     </script>
 @endpush

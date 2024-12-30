@@ -60,6 +60,8 @@ Route::middleware(['auth', 'role:1,2,3'])->group(function () {
     Route::get('/bahanmasuk/{bahanmasuk}/edit', [BahanMasukController::class, 'edit'])->name('bahanmasuk.edit');
     Route::put('/bahanmasuk/{bahanmasuk}', [BahanMasukController::class, 'update'])->name('bahanmasuk.update');
     Route::delete('/bahanmasuk/{bahanmasuk}', [BahanMasukController::class, 'destroy'])->name('bahanmasuk.destroy');
+    Route::get('/bahan/export-excel', [BahanController::class, 'exportExcel'])->name('bahan.exportExcel');
+
 
     // Bahan Keluar
     Route::get('/bahankeluar', [BahanKeluarController::class, 'index'])->name('bahankeluar.index');

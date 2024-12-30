@@ -21,12 +21,20 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">@yield('title')</h4>
+                        <h4 class="fw-semibold uppercase">
+                            {{ Str::upper($__env->yieldContent('title')) }}
+                        </h4>
+                        @yield('formfilter')
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body ">
                         @yield('content')
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
     <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>

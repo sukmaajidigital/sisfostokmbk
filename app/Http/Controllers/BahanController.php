@@ -9,6 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Yajra\DataTables\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BahanExport;
 
 class BahanController extends Controller
 {
@@ -24,12 +26,19 @@ class BahanController extends Controller
     // }
     public function index(): View
     {
-        return view('page.bahan.index');
+        $kategoris = Kategori::select('id', 'nama_kategori')->get(); // Ambil semua kategori
+        return view('page.bahan.index', compact('kategoris'));
     }
-    public function getData(): JsonResponse
+
+    public function getData(Request $request): JsonResponse
     {
         $bahans = Bahan::with('kategori:id,nama_kategori') // Eager load relasi kategori
-            ->select('id', 'nama_bahan', 'stok', 'satuan', 'id_kategori'); // Pilih kolom yang diperlukan
+            ->select('id', 'nama_bahan', 'stok', 'satuan', 'id_kategori');
+
+        // Filter berdasarkan kategori
+        if ($request->has('kategori') && $request->kategori != '') {
+            $bahans->where('id_kategori', $request->kategori);
+        }
 
         return DataTables::of($bahans)
             ->addColumn('kategori', function ($row) {
@@ -44,6 +53,12 @@ class BahanController extends Controller
             })
             ->rawColumns(['action']) // Jika kolom action mengandung HTML
             ->make(true);
+    }
+    public function exportExcel(Request $request)
+    {
+        $kategori = $request->kategori;
+        $satuan = $request->satuan;
+        return Excel::download(new BahanExport($kategori, $satuan), 'bahan.xlsx');
     }
 
     public function create(): View

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'bahankeluar')
+@section('title', 'bahan keluar')
 @section('content')
     <!-- Button Add Data -->
     @include('components.createmodalbutton', [

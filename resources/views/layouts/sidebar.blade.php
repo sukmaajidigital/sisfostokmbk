@@ -22,17 +22,17 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                {{-- <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('sample') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-article"></i>
                         </span>
                         <span class="hide-menu">Sample</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">MENU</span>
+                    <span class="hide-menu">MASTER DATA</span>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('bahan.index') }}" aria-expanded="false">
@@ -66,6 +66,10 @@
                         </span>
                         <span class="hide-menu">Supplier</span>
                     </a>
+                </li>
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">MASTER DATA</span>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('bahanmasuk.index') }}" aria-expanded="false">

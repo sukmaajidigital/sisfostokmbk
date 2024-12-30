@@ -1,13 +1,10 @@
 @extends('layouts.app')
-@section('title', 'bahanmasuk')
+@section('title', 'bahan masuk')
 @section('content')
-
-    <!-- Button Add Data -->
     @include('components.createmodalbutton', [
         'route' => route('bahanmasuk.create'),
         'label' => 'Add Bahan Masuk',
     ])
-    <!-- Table -->
     <table id="example" class="table table-hover">
         <thead>
             <tr>
