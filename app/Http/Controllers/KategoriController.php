@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\kategori;
+use App\Models\Kategori;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,12 +11,12 @@ class KategoriController extends Controller
 {
     public function ajax()
     {
-        $kategoris = kategori::all();
+        $kategoris = Kategori::all();
         return response()->json($kategoris);
     }
     public function index(): View
     {
-        $kategoris = kategori::orderByDesc('created_at')->paginate(10);
+        $kategoris = Kategori::orderByDesc('created_at')->paginate(10);
         return view('page.kategori.index', compact('kategoris'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -28,7 +28,7 @@ class KategoriController extends Controller
     public function store(Request $request): RedirectResponse
     {
         try {
-            kategori::create($request->all());
+            Kategori::create($request->all());
             return redirect()->route('kategori.index')->with('success', 'kategori created successfully.');
         } catch (\Exception $e) {
             return back()
@@ -37,11 +37,11 @@ class KategoriController extends Controller
         }
     }
 
-    public function edit(kategori $kategori): View
+    public function edit(Kategori $kategori): View
     {
         return view('page.kategori.edit', compact('kategori'));
     }
-    public function update(Request $request, kategori $kategori): RedirectResponse
+    public function update(Request $request, Kategori $kategori): RedirectResponse
     {
         try {
             $kategori->update($request->all());
@@ -52,7 +52,7 @@ class KategoriController extends Controller
                 ->withErrors('Failed to update kategori.');
         }
     }
-    public function destroy(kategori $kategori)
+    public function destroy(Kategori $kategori)
     {
         $kategori->delete();
         return to_route('kategori.index')->with('success', 'kategori Deleted successfully.');
