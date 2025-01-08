@@ -55,6 +55,7 @@ Route::middleware(['auth', 'role:1,2,3'])->group(function () {
 
     // Bahan Masuk
     Route::get('/bahanmasuk', [BahanMasukController::class, 'index'])->name('bahanmasuk.index');
+    Route::get('/bahanmasuk/export', [BahanMasukController::class, 'export'])->name('bahanmasuk.export');
     Route::get('/bahanmasuk/create', [BahanMasukController::class, 'create'])->name('bahanmasuk.create');
     Route::post('/bahanmasuk', [BahanMasukController::class, 'store'])->name('bahanmasuk.store');
     Route::get('/bahanmasuk/{bahanmasuk}/edit', [BahanMasukController::class, 'edit'])->name('bahanmasuk.edit');
