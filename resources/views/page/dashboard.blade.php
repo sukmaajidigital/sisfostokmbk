@@ -44,13 +44,51 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <div class="card">
+                    <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="card-title fw-semibold mb-4">Jumlah Bahan Masuk</h5>
                             <h2 class="fw-bold">{{ $jumlahBahanMasuk }}</h2>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="GET" action="{{ route('dashboard') }}">
+                                <div class="row mb-3">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="kategorimasuk" class="form-label">Kategori Bahan</label>
+                                        <select name="kategorimasuk" id="kategorimasuk" class="form-select">
+                                            <option value="">-- Pilih Kategori --</option>
+                                            @foreach ($kategoris as $kategori)
+                                                <option value="{{ $kategori->id }}" {{ request('kategorimasuk') == $kategori->id ? 'selected' : '' }}>
+                                                    {{ $kategori->nama_kategori }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="supplier" class="form-label">Supplier</label>
+                                        <select name="supplier" id="supplier" class="form-select">
+                                            <option value="">-- Pilih Supplier --</option>
+                                            @foreach ($suppliers as $supplier)
+                                                <option value="{{ $supplier->id }}" {{ request('supplier') == $supplier->id ? 'selected' : '' }}>
+                                                    {{ $supplier->nama_supplier }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="d-flex flex-wrap gap-2">
+                                            <button type="submit" class="btn btn-primary">Filter</button>
+                                            <a href="{{ route('bahanmasuk.export', ['format' => 'pdf'] + request()->all()) }}" class="btn btn-danger">Export PDF</a>
+                                            <a href="{{ route('bahanmasuk.export', ['format' => 'excel'] + request()->all()) }}" class="btn btn-success">Export Excel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-header">
@@ -89,13 +127,51 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <div class="card">
+                    <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="card-title fw-semibold mb-4">Jumlah Bahan Keluar</h5>
                             <h2 class="fw-bold">{{ $jumlahBahanKeluar }}</h2>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="GET" action="{{ route('dashboard') }}">
+                                <div class="row mb-3">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="kategorikeluar" class="form-label">Kategori Bahan</label>
+                                        <select name="kategorikeluar" id="kategorikeluar" class="form-select">
+                                            <option value="">-- Pilih Kategori --</option>
+                                            @foreach ($kategoris as $kategori)
+                                                <option value="{{ $kategori->id }}" {{ request('kategorikeluar') == $kategori->id ? 'selected' : '' }}>
+                                                    {{ $kategori->nama_kategori }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="keperluan" class="form-label">Keperluan</label>
+                                        <select name="keperluan" id="keperluan" class="form-select">
+                                            <option value="">-- Pilih Keperluan --</option>
+                                            @foreach ($keperluans as $keperluan)
+                                                <option value="{{ $keperluan->id }}" {{ request('keperluan') == $keperluan->id ? 'selected' : '' }}>
+                                                    {{ $keperluan->nama_keperluan }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="d-flex flex-wrap gap-2">
+                                            <button type="submit" class="btn btn-primary">Filter</button>
+                                            <a href="{{ route('bahankeluar.export', ['format' => 'pdf'] + request()->all()) }}" class="btn btn-danger">Export PDF</a>
+                                            <a href="{{ route('bahankeluar.export', ['format' => 'excel'] + request()->all()) }}" class="btn btn-success">Export Excel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-header">
@@ -143,7 +219,7 @@
                     scrollX: true,
                     searching: true,
                     lengthChange: false,
-                    pageLength: 2
+                    pageLength: 4
                 });
             });
         </script>
