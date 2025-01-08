@@ -178,7 +178,7 @@
                             <h5 class="card-title fw-semibold mb-4">Tabel Bahan Keluar</h5>
                         </div>
                         <div class="card-body">
-                            <table id="example" class="table table-hover">
+                            <table id="example1" class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -214,6 +214,16 @@
         <script>
             $(document).ready(function() {
                 $('#example').DataTable({
+                    responsive: true,
+                    autoWidth: true,
+                    scrollX: true,
+                    searching: true,
+                    lengthChange: false,
+                    pageLength: 4
+                });
+            });
+            $(document).ready(function() {
+                $('#example1').DataTable({
                     responsive: true,
                     autoWidth: true,
                     scrollX: true,
