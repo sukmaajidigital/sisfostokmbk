@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BahanKeluarExport;
+use App\Exports\BahanMasukExport;
 use App\Models\Bahan;
 use App\Models\BahanKeluar;
+use App\Models\Kategori;
 use App\Models\Keperluan;
 use App\Models\Supplier;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BahanKeluarController extends Controller
 {
@@ -17,10 +22,50 @@ class BahanKeluarController extends Controller
         $bahankeluars = BahanKeluar::all();
         return response()->json($bahankeluars);
     }
-    public function index(): View
+    public function index(Request $request): View
     {
-        $bahankeluars = BahanKeluar::all();
-        return view('page.bahankeluar.index', compact('bahankeluars'));
+        $kategoriId = $request->input('kategori');
+        $keperluanId = $request->input('keperluan');
+
+        $bahankeluars = BahanKeluar::when($kategoriId, function ($query, $kategoriId) {
+            return $query->whereHas('bahan.kategori', function ($query) use ($kategoriId) {
+                $query->where('id', $kategoriId);
+            });
+        })
+            ->when($keperluanId, function ($query, $keperluanId) {
+                return $query->where('id_keperluan', $keperluanId);
+            })
+            ->get();
+
+        $kategoris = Kategori::all();
+        $keperluans = Keperluan::all();
+
+        return view('page.bahankeluar.index', compact('bahankeluars', 'kategoris', 'keperluans'));
+    }
+    public function export(Request $request)
+    {
+        $kategoriId = $request->input('kategori');
+        $supplierId = $request->input('supplier');
+        $format = $request->input('format');
+
+        $bahankeluars = BahanKeluar::when($kategoriId, function ($query, $kategoriId) {
+            return $query->whereHas('bahan.kategori', function ($query) use ($kategoriId) {
+                $query->where('id', $kategoriId);
+            });
+        })
+            ->when($supplierId, function ($query, $supplierId) {
+                return $query->where('supplier_id', $supplierId);
+            })
+            ->get();
+
+        if ($format === 'pdf') {
+            $pdf = Pdf::loadView('page.bahankeluar.export', compact('bahankeluars'));
+            return $pdf->download('bahankeluar.pdf');
+        } elseif ($format === 'excel') {
+            return Excel::download(new BahanKeluarExport($bahankeluars), 'bahankeluar.xlsx');
+        }
+
+        return redirect()->back();
     }
     public function create(): View
     {
