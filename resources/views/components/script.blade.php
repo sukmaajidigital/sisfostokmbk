@@ -33,6 +33,10 @@
             $('#example').DataTable({
                 responsive: true,
                 autoWidth: true,
+                scrollX: true,
+                searching: true,
+                lengthChange: false,
+                pageLength: 10
             });
         });
     </script>
