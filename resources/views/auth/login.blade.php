@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
 </head>
 
+
 <body>
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
@@ -22,6 +23,15 @@
                                     <img src="{{ asset('assets/images/logos/mbklong.png') }}" width="180" alt="">
                                 </a>
                                 <p class="text-center">Sistem Pendataan Stok Bahan Baku</p>
+                                @if (session('success'))
+                                    <div id="resultMessage" class="alert alert-success" role="alert">
+                                        {{ session('success') }}
+                                    </div>
+                                @elseif(session('error'))
+                                    <div id="resultMessage" class="alert alert-danger" role="alert">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
                                 <form method="POST" action="{{ route('login.post') }}">
                                     @csrf
                                     <div class="mb-3">
@@ -40,7 +50,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-warning w-100 py-8 fs-4 mb-4 rounded-2">Sign In</button>
+                                    <button type="submit" id="btnlogin" class="btn btn-warning w-100 py-8 fs-4 mb-4 rounded-2">Sign In</button>
                                 </form>
                             </div>
                         </div>

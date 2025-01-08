@@ -21,10 +21,19 @@ class AuthController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
-        $request->session()->regenerate();
-        return redirect()->intended(route('dashboard', absolute: false));
+        try {
+            $request->authenticate();
+            $request->session()->regenerate();
+
+            return redirect()->intended(route('dashboard', absolute: false))
+                ->with('success', 'Login berhasil');
+        } catch (\Illuminate\Auth\AuthenticationException $e) {
+            return redirect()->back()
+                ->withInput($request->only('name'))
+                ->with('error', 'Login gagal');
+        }
     }
+
 
     /**
      * Destroy an authenticated session.
@@ -37,6 +46,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/login')->with('success', 'Logout berhasil');
     }
 }
