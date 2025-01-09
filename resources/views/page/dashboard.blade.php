@@ -10,7 +10,7 @@
                                 {{ substr(Str::upper(Auth::user()->nama_user), 0, 1) }}
                             </div>
                             <div>
-                                <h5 class="card-title mb-1">Welcome to Sistem Pendataan Stok bahan Baku</h5>
+                                <h5 class="card-title mb-1">Welcome to Sistem Pendataan Stok bahan baku <strong style="color: #ffc107">Muria Batik Kudus</strong></h5>
                                 <p class="card-text mb-0">Hello, <strong>{{ Auth::user()->nama_user }}</strong>!</p>
                             </div>
                         </div>
