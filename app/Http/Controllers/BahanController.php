@@ -19,20 +19,15 @@ class BahanController extends Controller
         $bahans = Bahan::all();
         return response()->json($bahans);
     }
-    // public function index(): View
-    // {
-    //     $bahans = Bahan::all();
-    //     return view('page.bahan.index', compact('bahans'));
-    // }
     public function index(): View
     {
-        $kategoris = Kategori::select('id', 'nama_kategori')->get(); // Ambil semua kategori
+        $kategoris = Kategori::select('id', 'nama_kategori')->get();
         return view('page.bahan.index', compact('kategoris'));
     }
 
     public function getData(Request $request): JsonResponse
     {
-        $bahans = Bahan::with('kategori:id,nama_kategori') // Eager load relasi kategori
+        $bahans = Bahan::with('kategori:id,nama_kategori')
             ->select('id', 'nama_bahan', 'stok', 'satuan', 'id_kategori');
 
         // Filter berdasarkan kategori
@@ -42,16 +37,18 @@ class BahanController extends Controller
 
         return DataTables::of($bahans)
             ->addColumn('kategori', function ($row) {
-                return $row->kategori->nama_kategori ?? '-'; // Tampilkan nama kategori atau tanda jika null
+                return $row->kategori->nama_kategori ?? '-';
             })
             ->addColumn('action', function ($row) {
                 return view('components.action-buttons', [
                     'editRoute' => route('bahan.edit', $row->id),
                     'deleteRoute' => route('bahan.destroy', $row->id),
-                    'deleteMessage' => 'Are you sure you want to delete this item?',
+                    'deleteMessage' => 'yakin ingin mengapus bahan ' . $row->nama_bahan . ' ?',
+                    'editLabel' => 'Edit',
+                    'deleteLabel' => 'Delete',
                 ])->render();
             })
-            ->rawColumns(['action']) // Jika kolom action mengandung HTML
+            ->rawColumns(['action'])
             ->make(true);
     }
     public function exportExcel(Request $request)

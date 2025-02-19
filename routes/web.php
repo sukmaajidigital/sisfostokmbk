@@ -38,6 +38,7 @@ Route::middleware(['auth', 'role:1,2,3'])->group(function () {
 
     // Supplier
     Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
+    Route::get('/supplier/export', [SupplierController::class, 'export'])->name('supplier.export');
     Route::get('/supplier/create', [SupplierController::class, 'create'])->name('supplier.create');
     Route::post('/supplier', [SupplierController::class, 'store'])->name('supplier.store');
     Route::get('/supplier/{supplier}/edit', [SupplierController::class, 'edit'])->name('supplier.edit');

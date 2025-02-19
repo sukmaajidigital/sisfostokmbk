@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SupplierExport;
 use App\Models\Supplier;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SupplierController extends Controller
 {
@@ -52,9 +55,23 @@ class SupplierController extends Controller
                 ->withErrors('Failed to update supplier.');
         }
     }
-    public function destroy(supplier $supplier)
+    public function destroy(Supplier $supplier)
     {
         $supplier->delete();
         return to_route('supplier.index')->with('success', 'supplier Deleted successfully.');
+    }
+    public function export(Request $request)
+    {
+        $format = $request->input('format');
+        $suppliers = Supplier::all();
+
+        if ($format === 'pdf') {
+            $pdf = Pdf::loadView('page.supplier.export', compact('suppliers'));
+            return $pdf->download('supplier.pdf');
+        } elseif ($format === 'excel') {
+            return Excel::download(new SupplierExport($suppliers), 'supplier.xlsx');
+        }
+
+        return redirect()->back();
     }
 }

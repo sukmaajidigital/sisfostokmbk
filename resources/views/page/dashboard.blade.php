@@ -40,6 +40,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-semibold mb-4">Total Supplier</h5>
+                            <h2 class="fw-bold">{{ $totalSupplier }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-semibold mb-4">Total User</h5>
+                            <h2 class="fw-bold">{{ $totalUser }}</h2>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <div class="row">

@@ -66,7 +66,7 @@
                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                         @include('components.editmodalbutton', [
                             'route' => route('bahanmasuk.edit', $bahanmasuk->id),
-                            'label' => 'Edit Bahan Masuk',
+                            'label' => 'Edit',
                         ])
                         @include('components.deletebutton', [
                             'route' => route('bahanmasuk.destroy', $bahanmasuk->id),

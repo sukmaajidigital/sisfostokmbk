@@ -3,9 +3,9 @@
 @section('formfilter')
     <div class="row mb-3 align-items-end">
         <div class="col-md-4">
-            <label for="filter-kategori" class="fw-semibold">Filter Kategori</label>
+            <label for="filter-kategori" class="fw-semibold mb-2">Filter Kategori</label>
             <select id="filter-kategori" class="form-select">
-                <option value="">-- Filter by Kategori --</option>
+                <option value="">-- Semua --</option>
                 @foreach ($kategoris as $kategori)
                     <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
                 @endforeach

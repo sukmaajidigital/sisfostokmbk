@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class BahanKeluarController extends Controller
@@ -75,10 +76,20 @@ class BahanKeluarController extends Controller
     }
     public function store(Request $request): RedirectResponse
     {
-        $stoklama = Bahan::where('id', $request->id_bahan)->first()->stok;
-        Bahan::where('id', $request->id_bahan)->update([
-            'stok' => $stoklama - $request->jumlah
+        // Ambil data stok lama
+        $bahan = Bahan::where('id', $request->id_bahan)->first();
+
+        // Cek apakah stok cukup
+        if ($request->jumlah > $bahan->stok) {
+            return redirect()->back()->with('error', 'Jumlah bahan keluar melebihi stok yang tersedia!');
+        }
+
+        // Kurangi stok jika cukup
+        $bahan->update([
+            'stok' => $bahan->stok - $request->jumlah
         ]);
+
+        // Simpan data bahan keluar
         BahanKeluar::create([
             'id_bahan' => $request->id_bahan,
             'tanggal' => $request->tanggal,
@@ -86,7 +97,8 @@ class BahanKeluarController extends Controller
             'jumlah' => $request->jumlah,
             'catatan' => $request->catatan,
         ]);
-        return redirect()->route('bahankeluar.index')->with('success', 'bahankeluar created successfully.');
+
+        return redirect()->route('bahankeluar.index')->with('success', 'Bahan keluar berhasil ditambahkan.');
     }
     public function edit(BahanKeluar $bahankeluar): View
     {
@@ -96,29 +108,50 @@ class BahanKeluarController extends Controller
     }
     public function update(Request $request, BahanKeluar $bahankeluar): RedirectResponse
     {
+        return DB::transaction(function () use ($request, $bahankeluar) {
+            // Ambil stok lama dari tabel bahan
+            $bahan = Bahan::where('id', $bahankeluar->id_bahan)->first();
 
-        $stoklama = bahan::where('id', $request->id_bahan)->first()->stok;
-        $editbahankeluar = BahanKeluar::where('id_bahan', $request->id_bahan)->first()->jumlah;
-        $hasilstoklama = $stoklama + $editbahankeluar;
-        bahan::where('id', $request->id_bahan)->update([
-            'stok' => $hasilstoklama - $request->jumlah
-        ]);
-        $bahankeluar->update([
-            'id_bahan' => $request->id_bahan,
-            'tanggal' => $request->tanggal,
-            'id_keperluan' => $request->id_keperluan,
-            'jumlah' => $request->jumlah,
-            'catatan' => $request->catatan,
-        ]);
-        return redirect()->route('bahankeluar.index')->with('success', 'bahankeluar update successfully.');
+            // Kembalikan stok sebelum mengupdate
+            $bahan->stok += $bahankeluar->jumlah;
+
+            // Cek apakah stok cukup untuk perubahan
+            if ($request->jumlah > $bahan->stok) {
+                return redirect()->back()->with('error', 'Jumlah bahan keluar melebihi stok yang tersedia!');
+            }
+
+            // Update stok dengan jumlah baru
+            $bahan->stok -= $request->jumlah;
+            $bahan->save();
+
+            // Update data bahan keluar
+            $bahankeluar->update([
+                'id_bahan' => $request->id_bahan,
+                'tanggal' => $request->tanggal,
+                'id_keperluan' => $request->id_keperluan,
+                'jumlah' => $request->jumlah,
+                'catatan' => $request->catatan,
+            ]);
+
+            return redirect()->route('bahankeluar.index')->with('success', 'Bahan keluar berhasil diperbarui.');
+        });
     }
-    public function destroy(bahankeluar $bahankeluar)
+    public function destroy(BahanKeluar $bahankeluar)
     {
-        $stoklama = bahan::where('id', $bahankeluar->id_bahan)->first()->stok;
-        bahan::where('id', $bahankeluar->id_bahan)->update([
-            'stok' => $stoklama + $bahankeluar->jumlah
-        ]);
-        $bahankeluar->delete();
-        return to_route('bahankeluar.index')->with('success', 'bahankeluar Deleted successfully.');
+        return DB::transaction(function () use ($bahankeluar) {
+            // Ambil data bahan
+            $bahan = Bahan::where('id', $bahankeluar->id_bahan)->first();
+
+            if ($bahan) {
+                // Kembalikan stok sebelum menghapus data
+                $bahan->stok += $bahankeluar->jumlah;
+                $bahan->save();
+            }
+
+            // Hapus data bahan keluar
+            $bahankeluar->delete();
+
+            return redirect()->route('bahankeluar.index')->with('success', 'Bahan keluar berhasil dihapus.');
+        });
     }
 }

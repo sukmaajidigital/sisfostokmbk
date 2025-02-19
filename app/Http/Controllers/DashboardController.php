@@ -24,6 +24,7 @@ class DashboardController extends Controller
         $jumlahBahanMasuk = BahanMasuk::sum('jumlah');
         $jumlahBahanKeluar = BahanKeluar::sum('jumlah');
         $totalSupplier = Supplier::count();
+        $totalUser = User::count();
         $suppliers = Supplier::all();
         $kategoris = Kategori::all();
 
@@ -58,7 +59,7 @@ class DashboardController extends Controller
 
         $kategoris = Kategori::all();
         $keperluans = Keperluan::all();
-        return view('page.dashboard', compact('user', 'totalJenisBahan', 'totalBahanMasuk', 'totalBahanKeluar', 'totalSupplier', 'jumlahBahanMasuk', 'jumlahBahanKeluar', 'bahanmasuks', 'bahankeluars', 'suppliers', 'kategoris', 'keperluans'));
+        return view('page.dashboard', compact('user', 'totalJenisBahan', 'totalBahanMasuk', 'totalBahanKeluar', 'totalSupplier', 'jumlahBahanMasuk', 'jumlahBahanKeluar', 'bahanmasuks', 'bahankeluars', 'suppliers', 'kategoris', 'keperluans', 'kategorimasukId', 'supplierId', 'kategorikeluarId', 'keperluanId', 'totalUser'));
     }
     public function sample()
     {

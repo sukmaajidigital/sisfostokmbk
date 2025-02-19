@@ -1,11 +1,11 @@
 <div>
     @include('components.editmodalbutton', [
         'route' => $editRoute,
-        'label' => 'Edit Bahan',
+        'label' => $editLabel,
     ])
     @include('components.deletebutton', [
         'route' => $deleteRoute,
         'confirmationMessage' => $deleteMessage,
-        'label' => 'Delete',
+        'label' => $deleteLabel,
     ])
 </div>

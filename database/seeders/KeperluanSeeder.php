@@ -14,7 +14,7 @@ class KeperluanSeeder extends Seeder
     public function run(): void
     {
         // Seed Keperluan
-        $keperluans = ['pelatihan', 'produksi'];
+        $keperluans = ['pelatihan', 'produksi', 'pesanan'];
 
         foreach ($keperluans as $keperluan) {
             DB::table('keperluans')->insert([
