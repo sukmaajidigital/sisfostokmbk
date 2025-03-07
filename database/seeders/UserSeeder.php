@@ -15,6 +15,13 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
+            'role' => '0',
+            'nama_user' => 'root',
+            'name' => 'root',
+            'email' => 'root@muriabatik.com',
+            'password' => Hash::make('root123'),
+        ]);
+        User::factory()->create([
             'role' => '1',
             'nama_user' => 'admin',
             'name' => 'admin',
@@ -29,7 +36,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('produksi123'),
         ]);
         User::factory()->create([
-            'role' => '2',
+            'role' => '3',
             'nama_user' => 'owner',
             'name' => 'owner',
             'email' => 'owner@muriabatik.com',

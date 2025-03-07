@@ -20,12 +20,13 @@ class RoleMiddleware
             return redirect('login');
         }
         // role
+        // 0 = root  // akun untuk mengakses semuanya di aplikasi
         // 1 = admin
-        // 2 = direktur
-        // 3 = hrd
+        // 2 = produksi
+        // 3 = owner
         $user = Auth::user();
         if (!in_array($user->role, $roles)) {
-            abort(403, 'ANDA TIDAK ADA AKSES KE HALAMAN INI KAKAK.');
+            abort(403, 'MOHON MAAF ANDA TIDAK MEMILIKI AKSES KE HALAMAN INI.');
         }
         return $next($request);
     }
