@@ -27,7 +27,7 @@
         </div>
 
         <!-- Table Section -->
-        <table class="table table-bordered table-hover" style="background-color: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); font-size: 0.85rem;">
+        <table class="table table-bordered table-hover mb-4" style="background-color: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); font-size: 0.85rem;">
             <thead>
                 <tr>
                     <th style="background-color: #ffc107; color: black;">No.</th>
@@ -53,10 +53,15 @@
                 @endforeach
             </tbody>
         </table>
-
         <!-- Footer Section -->
-        <div class="text-center mt-4" style="font-size: 0.9rem; color: #856404;">
-            <p style="margin: 0;">Generated on: {{ date('d-m-Y H:i') }}</p>
+        <div class="text-center mt-4" style="font-size: 0.9rem; color: #856404;border-top: 2px solid #ffc107; padding-top: 15px;">
+            <p style="margin: 0;">Kudus, {{ date('d-m-Y') }}</p>
+            <p style="margin: 0; font-size: 0.9rem;">Penanggung Jawab</p>
+            <br>
+            <br>
+            <br>
+            <p>____________________________________</p>
+            <p style="font-size: 0.9rem;">{{ Auth::user()->name }}</p>
         </div>
     </div>
 

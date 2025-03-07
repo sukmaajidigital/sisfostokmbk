@@ -56,6 +56,7 @@ class BahanMasukController extends Controller
             ->get();
 
         if ($format === 'pdf') {
+            // return view('page.bahanmasuk.export', compact('bahanmasuks'));
             $pdf = Pdf::loadView('page.bahanmasuk.export', compact('bahanmasuks'));
             return $pdf->download('bahanmasuk.pdf');
         } elseif ($format === 'excel') {
