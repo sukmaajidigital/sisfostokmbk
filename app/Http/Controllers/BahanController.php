@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Yajra\DataTables\DataTables;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\BahanExport;
+use Illuminate\Support\Facades\Auth;
 
 class BahanController extends Controller
 {
@@ -28,29 +29,30 @@ class BahanController extends Controller
     public function getData(Request $request): JsonResponse
     {
         $bahans = Bahan::with('kategori:id,nama_kategori')
+            ->when($request->filled('kategori'), function ($query) use ($request) {
+                $query->where('id_kategori', $request->kategori);
+            })
             ->select('id', 'nama_bahan', 'stok', 'satuan', 'id_kategori');
-
-        // Filter berdasarkan kategori
-        if ($request->has('kategori') && $request->kategori != '') {
-            $bahans->where('id_kategori', $request->kategori);
-        }
 
         return DataTables::of($bahans)
             ->addColumn('kategori', function ($row) {
-                return $row->kategori->nama_kategori ?? '-';
+                return optional($row->kategori)->nama_kategori ?? '-';
             })
             ->addColumn('action', function ($row) {
-                return view('components.action-buttons', [
-                    'editRoute' => route('bahan.edit', $row->id),
-                    'deleteRoute' => route('bahan.destroy', $row->id),
-                    'deleteMessage' => 'yakin ingin mengapus bahan ' . $row->nama_bahan . ' ?',
-                    'editLabel' => 'Edit',
-                    'deleteLabel' => 'Delete',
-                ])->render();
-            })
-            ->rawColumns(['action'])
+                if (!in_array(Auth::user()->role, [2, 3])) {
+                    return view('components.action-buttons', [
+                        'editRoute' => route('bahan.edit', $row->id),
+                        'deleteRoute' => route('bahan.destroy', $row->id),
+                        'deleteMessage' => "Yakin ingin menghapus bahan {$row->nama_bahan}?",
+                        'editLabel' => 'Edit',
+                        'deleteLabel' => 'Delete',
+                    ])->render();
+                }
+                return '';
+            })->rawColumns(['action'])
             ->make(true);
     }
+
     public function exportExcel(Request $request)
     {
         $kategori = $request->kategori;

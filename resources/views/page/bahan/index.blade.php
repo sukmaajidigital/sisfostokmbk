@@ -17,10 +17,12 @@
     </div>
 @endsection
 @section('content')
-    @include('components.createmodalbutton', [
-        'route' => route('bahan.create'),
-        'label' => 'Add Bahan Baru',
-    ])
+    @unless (auth()->user()->role == 2)
+        @include('components.createmodalbutton', [
+            'route' => route('bahan.create'),
+            'label' => 'Add Bahan Baru',
+        ])
+    @endunless
     <table id="bahan-table" class="table table-hover">
         <thead>
             <tr>
@@ -29,7 +31,9 @@
                 <th>Stok</th>
                 <th>Satuan</th>
                 <th>Kategori</th>
-                <th>Action</th>
+                @unless (auth()->user()->role == 2 || auth()->user()->role == 3)
+                    <th>Action</th>
+                @endunless
             </tr>
         </thead>
     </table>
@@ -41,51 +45,68 @@
 @include('components.script')
 @push('script')
     <script>
-        let table = $('#bahan-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('bahan.getData') }}",
-                data: function(d) {
-                    d.kategori = $('#filter-kategori').val();
-                }
-            },
-            columns: [{
-                    data: 'id',
-                    name: 'id'
+        $(document).ready(function() {
+            let table = $('#bahan-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('bahan.getData') }}",
+                    data: function(d) {
+                        d.kategori = $('#filter-kategori').val();
+                    }
                 },
-                {
-                    data: 'nama_bahan',
-                    name: 'nama_bahan'
-                },
-                {
-                    data: 'stok',
-                    name: 'stok'
-                },
-                {
-                    data: 'satuan',
-                    name: 'satuan'
-                },
-                {
-                    data: 'kategori',
-                    name: 'kategori'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                }
-            ]
-        });
-        $('#filter-kategori').on('change', function() {
-            table.draw();
-        });
-        $('#export-excel').on('click', function(e) {
-            e.preventDefault();
-            let kategori = $('#filter-kategori').val();
-            let exportUrl = "{{ route('bahan.exportExcel') }}?kategori=" + kategori;
-            window.location.href = exportUrl;
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'nama_bahan',
+                        name: 'nama_bahan'
+                    },
+                    {
+                        data: 'stok',
+                        name: 'stok'
+                    },
+                    {
+                        data: 'satuan',
+                        name: 'satuan'
+                    },
+                    {
+                        data: 'kategori',
+                        name: 'kategori'
+                    },
+                    @if (!in_array(auth()->user()->role, [2, 3]))
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: false,
+                            searchable: false
+                        }
+                    @endif
+                ]
+            });
+
+            // Filter kategori
+            $('#filter-kategori').on('change', function() {
+                table.draw();
+            });
+
+            // Export ke Excel
+            $('#export-excel').on('click', function(e) {
+                e.preventDefault();
+                let kategori = $('#filter-kategori').val();
+                let exportUrl = "{{ route('bahan.exportExcel') }}?kategori=" + encodeURIComponent(kategori);
+
+                // Mencegah klik berulang
+                let $btn = $(this);
+                $btn.prop('disabled', true).text('Mengunduh...');
+
+                window.location.href = exportUrl;
+
+                setTimeout(function() {
+                    $btn.prop('disabled', false).text('Export Excel');
+                }, 3000);
+            });
         });
     </script>
 @endpush

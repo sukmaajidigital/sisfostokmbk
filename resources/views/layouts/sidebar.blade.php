@@ -32,7 +32,7 @@
                         <span class="hide-menu">Sample</span>
                     </a>
                 </li> --}}
-                @if (in_array(Auth::user()->role, [0, 1, 2, 3]))
+                @if (in_array(Auth::user()->role, [0, 1]))
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">MASTER DATA</span>
@@ -48,7 +48,7 @@
                         </a>
                     </li>
                 @endif
-                @if (in_array(Auth::user()->role, [0, 1, 2, 3]))
+                @if (in_array(Auth::user()->role, [0, 1]))
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('kategori.index') }}" aria-expanded="false">
                             <span>
@@ -58,7 +58,7 @@
                         </a>
                     </li>
                 @endif
-                @if (in_array(Auth::user()->role, [0, 1, 2, 3]))
+                @if (in_array(Auth::user()->role, [0, 1]))
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('keperluan.index') }}" aria-expanded="false">
                             <span>
@@ -68,7 +68,7 @@
                         </a>
                     </li>
                 @endif
-                @if (in_array(Auth::user()->role, [0, 1, 2, 3]))
+                @if (in_array(Auth::user()->role, [0, 1, 3]))
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('supplier.index') }}" aria-expanded="false">
                             <span>
@@ -78,13 +78,13 @@
                         </a>
                     </li>
                 @endif
-                @if (in_array(Auth::user()->role, [0, 1, 2, 3]))
+                @if (in_array(Auth::user()->role, [0, 1]))
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">BAHAN KELUAR MASUK</span>
                     </li>
                 @endif
-                @if (in_array(Auth::user()->role, [0, 1, 2, 3]))
+                @if (in_array(Auth::user()->role, [0, 1]))
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('bahanmasuk.index') }}" aria-expanded="false">
                             <span>
@@ -94,7 +94,7 @@
                         </a>
                     </li>
                 @endif
-                @if (in_array(Auth::user()->role, [0, 1, 2, 3]))
+                @if (in_array(Auth::user()->role, [0, 1, 2]))
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('bahankeluar.index') }}" aria-expanded="false">
                             <span>
@@ -104,13 +104,13 @@
                         </a>
                     </li>
                 @endif
-                @if (in_array(Auth::user()->role, [0, 1, 2, 3]))
+                @if (in_array(Auth::user()->role, [0, 1]))
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">MANAJEMEN AKUN</span>
                     </li>
                 @endif
-                @if (in_array(Auth::user()->role, [0, 1, 2, 3]))
+                @if (in_array(Auth::user()->role, [0, 1]))
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('user.index') }}" aria-expanded="false">
                             <span>
