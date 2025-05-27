@@ -17,7 +17,7 @@
     </div>
 @endsection
 @section('content')
-    @unless (auth()->user()->role == 2)
+    @unless (in_array(auth()->user()->role, [2, 3]))
         @include('components.createmodalbutton', [
             'route' => route('bahan.create'),
             'label' => 'Add Bahan Baru',

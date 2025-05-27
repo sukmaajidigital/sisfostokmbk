@@ -11,10 +11,12 @@
     </form>
 @endsection
 @section('content')
-    @include('components.createmodalbutton', [
-        'route' => route('supplier.create'),
-        'label' => 'Add Supplier Baru',
-    ])
+    @unless (in_array(auth()->user()->role, [2, 3]))
+        @include('components.createmodalbutton', [
+            'route' => route('supplier.create'),
+            'label' => 'Add Supplier Baru',
+        ])
+    @endunless
     <table id="example" class="table table-hover">
         <thead>
             <tr>
