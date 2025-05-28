@@ -32,8 +32,8 @@ class BahanKeluarSeeder extends Seeder
                 ]);
 
                 // Update stok di bahan masuk agar konsisten
-                DB::table('bahan_masuks')->where('id', $bahanMasuk->id)->update([
-                    'jumlah' => 10, // Stok setelah dikurangi
+                DB::table('bahans')->where('id', $bahanMasuk->id_bahan)->update([
+                    'stok' => 10, // Stok setelah dikurangi
                     'updated_at' => now(),
                 ]);
             }
