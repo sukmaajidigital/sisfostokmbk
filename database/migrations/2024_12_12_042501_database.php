@@ -14,15 +14,15 @@ return new class extends Migration
         // Tabel kategori
         Schema::create('kategoris', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_kategori');
+            $table->string('nama_kategori', 20);
             $table->timestamps();
         });
 
         // Tabel bahan
         Schema::create('bahans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_bahan');
-            $table->string('satuan');
+            $table->string('nama_bahan', 50);
+            $table->string('satuan', 20);
             $table->integer('stok')->default(0);
             $table->unsignedBigInteger('id_kategori');
             $table->foreign('id_kategori')->references('id')->on('kategoris')->onDelete('cascade');
@@ -32,8 +32,8 @@ return new class extends Migration
         // Tabel supplier
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_supplier');
-            $table->string('nomor');
+            $table->string('nama_supplier', 50);
+            $table->string('nomor', 20);
             $table->text('alamat');
             $table->timestamps();
         });
@@ -54,7 +54,7 @@ return new class extends Migration
         // Tabel keperluan
         Schema::create('keperluans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_keperluan');
+            $table->string('nama_keperluan', 20);
             $table->timestamps();
         });
 

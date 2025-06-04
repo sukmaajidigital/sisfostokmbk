@@ -104,13 +104,13 @@
                         </a>
                     </li>
                 @endif
-                @if (in_array(Auth::user()->role, [0, 1]))
+                @if (in_array(Auth::user()->role, [0,1]))
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">MANAJEMEN AKUN</span>
                     </li>
                 @endif
-                @if (in_array(Auth::user()->role, [0, 1]))
+                @if (in_array(Auth::user()->role, [0,1]))
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('user.index') }}" aria-expanded="false">
                             <span>
